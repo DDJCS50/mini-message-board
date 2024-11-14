@@ -3,6 +3,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-async-handler": "^1.2.0",
-    "start": "node app.js"
+    "start": "node ./app.js",
+    "build": "CI=false npm run build"
   }
 }
