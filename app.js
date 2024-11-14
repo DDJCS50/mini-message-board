@@ -18,7 +18,7 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).send(err.message);
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(Number(PORT), "0.0.0.0", () => {
-  console.log(`Message board app - listening on port ${PORT}!`);
+const port = process.env.PORT || 3000;
+app.listen(Number(port) || 3000, "0.0.0.0", () => {
+  console.log(`Message board app - listening on port ${port}!`);
 });
