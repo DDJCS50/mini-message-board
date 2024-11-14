@@ -4,6 +4,6 @@
     "express": "^4.21.1",
     "express-async-handler": "^1.2.0",
     "start": "node ./app.js",
-    "build": "CI=false npm run build"
+    "build": "npm run build"
   }
 }
