@@ -8,6 +8,6 @@ indexRouter.get("/new", (req, res) => {
   res.render("form", { title: "New Title" });
 });
 indexRouter.post("/new", indexController.post);
-indexRouter.get("/details/:index", indexController.getDetails);
+indexRouter.get("/details/:id", indexController.getDetails);
 
 module.exports = indexRouter;

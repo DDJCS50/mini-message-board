@@ -1,8 +1,13 @@
 {
   "dependencies": {
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-async-handler": "^1.2.0",
+    "pg": "^8.13.1",
     "start": "node ./app.js"
+  },
+  "scripts": {
+    "createdb": "node db/populatedb"
   }
 }

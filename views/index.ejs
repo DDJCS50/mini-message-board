@@ -5,17 +5,22 @@
 </head>
 
 <body>
+  <h1>
+    <%= title %>
+  </h1>
   <ul>
     <% messages.forEach((message)=> { %>
       <li>
-
-        <%= message.user %>
+        Username:
+        <%= message.username %>
           <br>
-          <%= message.text %>
+          Message:
+          <%= message.textinput %>
             <br>
+            Added:
             <%= message.added %>
               <br>
-              <a href="/details/<%= message.index %>">Open</a>
+              <a href="/details/<%= message.id %>">Open</a>
               <br>
               <br>
       </li>

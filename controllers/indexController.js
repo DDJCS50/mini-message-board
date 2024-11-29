@@ -1,11 +1,11 @@
 const asyncHandler = require("express-async-handler");
 const CustomNotFoundError = require("../errors/CustomNotFoundError");
-const db = require("../db");
+const db = require("../db/queries");
 
 // let links = [{ href: "/details", message: message }];
 
 const getIndex = asyncHandler(async (req, res) => {
-  let messages = db.messages;
+  let messages = await db.getAllUsernames();
 
   if (!messages) {
     throw new CustomNotFoundError("Messages not found");
@@ -15,34 +15,31 @@ const getIndex = asyncHandler(async (req, res) => {
 });
 
 const postMessage = asyncHandler(async (req, res) => {
-  let messages = db.messages;
+  let messages = await db.getAllUsernames();
 
   if (!messages) {
     throw new CustomNotFoundError("Messages not found");
   }
 
   if (req.body.messageText != "" && req.body.authorName != "") {
-    db.messages.push({ text: req.body.messageText, user: req.body.authorName, added: new Date(), index: messages.length + 1, details: `Something wacky with ${req.body.authorName}` });
+    db.insertMessage(req.body.authorName, req.body.messageText, new Date(), `Something wacky with ${req.body.authorName}`);
   }
 
   res.redirect("/");
 });
 
 const getDetailsPage = asyncHandler(async (req, res) => {
-  let messages = db.messages;
-  const { index } = req.params;
+  let messages = await db.getAllUsernames();
+  const { id } = req.params;
 
-  console.log(index);
-
-  const messageSelect = await db.getMessageByIndex(Number(index));
+  //TODO Change this to get by id
+  const messageSelect = await db.getMessageById(Number(id));
 
   if (!messages) {
     throw new CustomNotFoundError("Messages not found");
   }
 
-  console.log(req.body);
-
-  res.render("details", { title: "Details", message: messageSelect });
+  res.render("details", { title: "Details", message: messageSelect[0] });
 });
 
 module.exports = {
